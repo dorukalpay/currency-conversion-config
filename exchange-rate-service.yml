@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: exchange-rate-service
+  datasource:
+    url: jdbc:h2:mem:exchangeratedb
+    data-username: sa
+    data-password:
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+  sleuth:
+    sampler:
+      percentage: 1.0
+
+server:
+  port: 8091
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    hostname: localhost
+
+exchange:
+  rate:
+    name: exchange-rates-api
+    url: https://api.ratesapi.io/api/latest?
+
+logging:
+  level:
+    com:
+      currency:
+        exchangerateservice:
+          client:
+            ExchangeRateClient: DEBUG

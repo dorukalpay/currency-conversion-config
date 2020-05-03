@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: api-gateway
+  sleuth:
+    sampler:
+      percentage: 1.0
+
+server:
+  port: 8090
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    hostname: localhost
+
+zuul:
+  routes:
+    exchange-rate-service:
+      path: /exchange-rate/**
+      serviceId: exchange-rate-service
+    conversion-service:
+      path: /conversion/**
+      serviceId: conversion-service
+
+# Increase the Hystrix timeout to 60s (globally)
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+
+
+
+

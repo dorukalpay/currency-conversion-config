@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: conversion-service
+  datasource:
+    url: jdbc:h2:mem:conversiondb
+    data-username: sa
+    data-password:
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+  sleuth:
+    sampler:
+      percentage: 1.0
+
+
+server:
+  port: 8092
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    hostname: localhost
+
+exchange:
+  rate:
+    name: exchange-rate-service
+    url: http://exchange-rate-service
+
+logging:
+  level:
+    com:
+      currency:
+        conversionservice:
+          client:
+            ExchangeRateClient: DEBUG
+
